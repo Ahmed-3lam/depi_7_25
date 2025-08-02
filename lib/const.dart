@@ -1,0 +1,205 @@
+const avatar1 =
+    "https://static.vecteezy.com/system/resources/previews/012/177/621/non_2x/man-avatar-isolated-png.png";
+
+const avatar2 =
+    "https://thumbs.dreamstime.com/b/young-black-man-face-beard-male-portrait-avatar-flat-style-front-view-vector-young-black-man-face-beard-male-242893599.jpg";
+const avatar3 =
+    "https://st3.depositphotos.com/3431221/13621/v/450/depositphotos_136216036-stock-illustration-man-avatar-icon-hipster-character.jpg";
+
+List<Map<String, dynamic>> jsonList = [
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+  {
+    "name": "Mohamed",
+    "image_path": avatar2,
+    "msg": "Welcome gffgfg",
+    "created_at": "12:00 PM",
+  },
+  {
+    "name": "Alaa",
+    "image_path": avatar3,
+    "msg": "Good morning gffgfg",
+    "created_at": "2:00 PM",
+  },
+  {
+    "name": "Ahmed",
+    "image_path": avatar1,
+    "msg": "Hello gffgfg",
+    "created_at": "11:00 PM",
+  },
+];

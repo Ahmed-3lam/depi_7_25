@@ -1,3 +1,4 @@
+import 'package:depi_7_25/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,31 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(50),
-            decoration: BoxDecoration(
-              color: Colors.grey[400],
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(50),
-                topLeft: Radius.circular(50),
-              ),
-              border: Border.all(color: Colors.black, width: 2),
-            ),
-            child: Text(
-              "Hello Wolrd",
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+    return MaterialApp(home: HomeScreen());
   }
 }
 
@@ -43,3 +20,7 @@ class MyApp extends StatelessWidget {
 /// (4) Center
 /// (5) Text
 /// (6) Padding
+/// (7) Column
+/// (8) Row
+/// (9) Appbar
+/// (10) Icon
