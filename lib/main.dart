@@ -1,5 +1,7 @@
-import 'package:depi_7_25/home_screen.dart';
+import 'package:depi_7_25/whatsapp/home_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'messanger/messanger_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: HomeScreen());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MessangerScreen(),
+    );
   }
 }
 

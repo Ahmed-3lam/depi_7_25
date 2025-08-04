@@ -1,7 +1,8 @@
-import 'package:depi_7_25/const.dart';
-import 'package:depi_7_25/models/chat_model.dart';
-import 'package:depi_7_25/widgets/home_appbar.dart';
+import 'package:depi_7_25/whatsapp/const.dart';
+import 'package:depi_7_25/whatsapp/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
+
+import 'models/chat_model.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
