@@ -3,19 +3,20 @@ import 'package:depi_7_25/models/chat_model.dart';
 import 'package:depi_7_25/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     List<ChatModel> myChats = [];
     for (var item in jsonList) {
       myChats.add(ChatModel.fromJson(item));
     }
-    // List<ChatModel> myChats = jsonList
-    //     .map((e) => ChatModel.fromJson(e))
-    //     .toList();
-
     return Scaffold(
       appBar: homeAppBar(),
       body: SingleChildScrollView(
@@ -27,51 +28,67 @@ class HomeScreen extends StatelessWidget {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: myChats.length,
-              itemBuilder: (context, index) => _myChat(
-                imagePath: myChats[index].imagePath!,
-                name: myChats[index].name!,
-                message: myChats[index].msg!,
-                time: myChats[index].createdAt!,
-              ),
+              itemBuilder: (context, index) => _myChat(model: myChats[index]),
             ),
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Colors.green,
+        child: Icon(Icons.chat, color: Colors.white),
+      ),
     );
   }
 
-  Widget _myChat({
-    required String imagePath,
-    required String name,
-    required String message,
-    required String time,
-  }) {
+  Widget _myChat({required ChatModel model}) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CircleAvatar(
-            radius: 25,
-            backgroundColor: Colors.green.withOpacity(.4),
-            backgroundImage: NetworkImage(imagePath),
+          Container(
+            child: CircleAvatar(
+              radius: 25,
+              backgroundColor: Colors.green.withOpacity(.4),
+              backgroundImage: NetworkImage(model.imagePath!),
+            ),
           ),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
+                model.name!,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
-              Text(message, style: TextStyle(color: Colors.grey, fontSize: 14)),
+
+              _msgTypeWidget(model),
             ],
           ),
           Spacer(),
-          Text(time, style: TextStyle(color: Colors.grey, fontSize: 14)),
+          Text(
+            model.createdAt!,
+            style: TextStyle(color: Colors.grey, fontSize: 14),
+          ),
         ],
       ),
     );
+  }
+
+  Widget _msgTypeWidget(ChatModel model) {
+    if (model.msgType == MessageType.MSG) {
+      return Text(
+        model.msg!,
+        style: TextStyle(color: Colors.grey, fontSize: 14),
+      );
+    } else if (model.msgType == MessageType.VIDEO) {
+      return Row(
+        children: [Icon(Icons.video_call), SizedBox(width: 5), Text("Video")],
+      );
+    } else {
+      return Row(children: [Icon(Icons.gif), SizedBox(width: 5), Text("GIF")]);
+    }
   }
 
   Widget customChat({
