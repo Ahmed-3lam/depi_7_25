@@ -1,9 +1,5 @@
-import 'package:depi_7_25/whatsapp/home_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'bmi_calculator/bmi_screen.dart';
-import 'counter/counter_screen.dart';
-import 'messanger/messanger_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: BmiScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false);
   }
 }
 
