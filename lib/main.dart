@@ -1,14 +1,12 @@
-import 'package:depi_7_25/helpers/hive_helper.dart';
-import 'package:depi_7_25/screen/note_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'login_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox(HiveHelper.noteBox);
-  await HiveHelper.getMyNotes();
   // var box = Hive.box("box1");
   //
   // // box.put("name", "Ahmed");
@@ -23,7 +21,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: NoteScreen());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen());
   }
 }
 
