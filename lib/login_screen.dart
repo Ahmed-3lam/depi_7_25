@@ -1,3 +1,4 @@
+import 'package:depi_7_25/widgets/custom_password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -12,11 +13,12 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool obscureText = true;
   final _key = GlobalKey<FormState>();
+  bool obscureText = true;
 
   @override
   Widget build(BuildContext context) {
+    print("build from login screen");
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -49,67 +51,33 @@ class _LoginScreenState extends State<LoginScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Phone Number",
-                        style: TextStyle(
-                          color: Color(0xFF8B8B97),
-                          fontSize: 14,
-                        ),
+                      CustomTextField(
+                        label: "Email",
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (!value!.contains("@")) {
+                            return "Email should contain @";
+                          }
+                        },
                       ),
-                      SizedBox(height: 10),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: TextFormField(
-                          decoration: InputDecoration(border: InputBorder.none),
-                          validator: (value) {
-                            if (value!.length != 11) {
-                              return "Phone Number Should be 11 digits";
-                            }
-                          },
-                        ),
+                      CustomTextField(
+                        label: "Phone Number",
+                        keyboardType: TextInputType.phone,
+                        validator: (value) {
+                          if (value!.length != 11) {
+                            return "Phone Number Should be 11 digits";
+                          }
+                        },
                       ),
                       SizedBox(height: 30),
-                      Text(
-                        "Password",
-                        style: TextStyle(
-                          color: Color(0xFF8B8B97),
-                          fontSize: 14,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                          color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(7),
-                        ),
-                        child: TextFormField(
-                          obscureText: obscureText,
-                          obscuringCharacter: "*",
-                          validator: (value) {
-                            if (value!.length < 6) {
-                              return "Password should be more than 6 letters";
-                            }
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                              onTap: () {
-                                obscureText = !obscureText;
-                                setState(() {});
-                              },
-                              child: Icon(
-                                obscureText
-                                    ? CupertinoIcons.eye_slash
-                                    : CupertinoIcons.eye,
-                              ),
-                            ),
-                            border: InputBorder.none,
-                          ),
-                        ),
+                      CustomTextField(
+                        label: "Password",
+                        isPassword: true,
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return "Password should be more than 6 letters";
+                          }
+                        },
                       ),
                     ],
                   ),
@@ -145,6 +113,48 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget customPasswordField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+
+      children: [
+        Text(
+          "Password",
+          style: TextStyle(color: Color(0xFF8B8B97), fontSize: 14),
+        ),
+        SizedBox(height: 10),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          decoration: BoxDecoration(
+            color: Colors.grey[300],
+            borderRadius: BorderRadius.circular(7),
+          ),
+          child: TextFormField(
+            obscureText: obscureText,
+            obscuringCharacter: "*",
+            validator: (value) {
+              if (value!.length < 6) {
+                return "Password should be more than 6 letters";
+              }
+            },
+            decoration: InputDecoration(
+              suffixIcon: InkWell(
+                onTap: () {
+                  obscureText = !obscureText;
+                  setState(() {});
+                },
+                child: Icon(
+                  obscureText ? CupertinoIcons.eye_slash : CupertinoIcons.eye,
+                ),
+              ),
+              border: InputBorder.none,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
