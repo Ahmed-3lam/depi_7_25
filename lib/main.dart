@@ -1,8 +1,11 @@
+import 'package:depi_7_25/splash/splash_screen.dart';
+import 'package:depi_7_25/splash/splash_screen2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'login_screen.dart';
+import 'auth/login_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +24,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: LoginScreen());
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: SplashScreen(),
+    );
   }
 }
 
