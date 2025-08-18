@@ -1,4 +1,7 @@
+import 'package:depi_7_25/auth/auth_screen.dart';
+import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../const.dart';
 
@@ -10,6 +13,8 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+  int count = 1;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,13 +22,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         padding: const EdgeInsets.only(top: 140, left: 30, right: 30),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Image.asset(imagePath + "onboarding_1.png"),
+            Container(
+              height: 380,
+              width: double.infinity,
+              child: Image.asset(imagePath + "onboarding_$count.png"),
             ),
             SizedBox(height: 80),
             Text(
-              "Browse all the category",
+              titles[count - 1],
               style: TextStyle(
                 fontFamily: "Griloy",
                 fontSize: 25,
@@ -32,7 +38,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
             SizedBox(height: 20),
             Text(
-              "In aliquip aute exercitation ut et nisi ut mollit. Deserunt dolor elit pariatur aute .",
+              descriptions[count - 1],
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontFamily: "Griloy",
@@ -42,10 +48,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ),
             ),
             SizedBox(height: 60),
-            InkWell(
-              onTap: () {},
+            GestureDetector(
+              onTap: () {
+                if (count < 3) {
+                  count++;
+                  setState(() {});
+                } else {
+                  HiveHelper.fillOnboardingBox();
+                  Get.offAll(AuthScreen());
+                }
+              },
               child: Image.asset(
-                imagePath + "next_1.png",
+                imagePath + "next_$count.png",
                 height: 88,
                 width: 88,
               ),

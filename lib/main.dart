@@ -1,3 +1,4 @@
+import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:depi_7_25/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ import 'onboarding/onboarding_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  // var box = Hive.box("box1");
+  await Hive.openBox(HiveHelper.onboardingBox);
   //
   // // box.put("name", "Ahmed");
   //
@@ -27,10 +28,15 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: OnboardingScreen(),
+      home: SplashScreen(),
     );
   }
 }
+
+/// Get.to
+/// Get.off
+/// Get.offAll
+/// Get.back
 
 /// (1) MaterialApp()
 /// (2) Scaffold
