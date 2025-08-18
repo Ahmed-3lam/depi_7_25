@@ -35,6 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
       setState(() {});
       if (count == 5) {
+        timer.cancel();
         Get.to(AuthScreen());
       }
     }));

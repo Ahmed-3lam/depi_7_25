@@ -19,7 +19,7 @@ class _AuthScreenState extends State<AuthScreen> {
 
   @override
   initState() {
-    timer = Timer.periodic(const Duration(milliseconds: 500), ((timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), ((timer) {
       count++;
       if (image == "background_1.png") {
         image = "background_2.png";
