@@ -1,18 +1,15 @@
+import 'package:depi_7_25/cubit/note_cubit.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NoteScreen extends StatefulWidget {
-  const NoteScreen({super.key});
-
-  @override
-  State<NoteScreen> createState() => _NoteScreenState();
-}
-
-class _NoteScreenState extends State<NoteScreen> {
+class NoteScreen extends StatelessWidget {
   final _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<NoteCubit>();
+    print("Rebuild =======");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -40,11 +37,9 @@ class _NoteScreenState extends State<NoteScreen> {
                     child: Text('Add'),
                     onPressed: () {
                       // HiveHelper.myNotes.add(_textController.text);
-                      HiveHelper.addNote(_textController.text);
+                      cubit.addNote(_textController.text);
                       _textController.text = "";
                       Navigator.pop(context);
-                      setState(() {});
-                      print(HiveHelper.myNotes);
                     },
                   ),
                 ],
@@ -63,84 +58,84 @@ class _NoteScreenState extends State<NoteScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              HiveHelper.removeAllNote();
-              setState(() {});
+              cubit.deleteAllNote();
             },
             icon: Icon(Icons.delete, color: Colors.red),
           ),
         ],
       ),
-      body: ListView.builder(
-        itemCount: HiveHelper.myNotes.length,
-        itemBuilder: (context, index) => Stack(
-          children: [
-            InkWell(
-              onTap: () async {
-                _textController.text = HiveHelper.myNotes[index];
-                await showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: const Text('Update a new Note'),
-                      content: TextField(
-                        controller: _textController,
-                        autofocus: true,
-                        decoration: const InputDecoration(
-                          hintText: "Enter the content of the Note.",
-                        ),
-                      ),
-                      actions: [
-                        TextButton(
-                          child: Text('Cancel'),
-                          onPressed: () {
-                            _textController.text = "";
-                            Navigator.pop(context);
-                          },
-                        ),
-                        TextButton(
-                          child: Text('Update'),
-                          onPressed: () {
-                            HiveHelper.updateNote(_textController.text, index);
-                            _textController.text = "";
-                            Navigator.pop(context);
-                            setState(() {});
-                            print(HiveHelper.myNotes);
-                          },
-                        ),
-                      ],
+      body: BlocBuilder<NoteCubit, NoteState>(
+        builder: (context, state) {
+          return ListView.builder(
+            itemCount: HiveHelper.myNotes.length,
+            itemBuilder: (context, index) => Stack(
+              children: [
+                InkWell(
+                  onTap: () async {
+                    _textController.text = HiveHelper.myNotes[index];
+                    await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Text('Update a new Note'),
+                          content: TextField(
+                            controller: _textController,
+                            autofocus: true,
+                            decoration: const InputDecoration(
+                              hintText: "Enter the content of the Note.",
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text('Cancel'),
+                              onPressed: () {
+                                _textController.text = "";
+                                Navigator.pop(context);
+                              },
+                            ),
+                            TextButton(
+                              child: Text('Update'),
+                              onPressed: () {
+                                cubit.updateNote(_textController.text, index);
+                                _textController.text = "";
+                                Navigator.pop(context);
+                                print(HiveHelper.myNotes);
+                              },
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                margin: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: index == 0
-                      ? Colors.red.withOpacity(.2)
-                      : index % 2 == 0
-                      ? Colors.green.withOpacity(.2)
-                      : Colors.yellow.withOpacity(.2),
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    margin: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: index == 0
+                          ? Colors.red.withOpacity(.2)
+                          : index % 2 == 0
+                          ? Colors.green.withOpacity(.2)
+                          : Colors.yellow.withOpacity(.2),
+                    ),
+                    child: Center(child: Text(HiveHelper.myNotes[index])),
+                  ),
                 ),
-                child: Center(child: Text(HiveHelper.myNotes[index])),
-              ),
+                Positioned(
+                  right: 40,
+                  top: 40,
+                  child: InkWell(
+                    onTap: () {
+                      cubit.deleteNote(index);
+                    },
+                    child: Icon(Icons.delete, color: Colors.red),
+                  ),
+                ),
+              ],
             ),
-            Positioned(
-              right: 40,
-              top: 40,
-              child: InkWell(
-                onTap: () {
-                  // HiveHelper.myNotes..removeAt(index);
-                  HiveHelper.removeNote(index);
-                  setState(() {});
-                },
-                child: Icon(Icons.delete, color: Colors.red),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

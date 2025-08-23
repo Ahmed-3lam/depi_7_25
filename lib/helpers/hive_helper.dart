@@ -13,7 +13,7 @@ class HiveHelper {
   }
 
   static Future<void> getMyNotes() async {
-    myNotes = box.get(noteKey);
+    if (box.isNotEmpty) myNotes = box.get(noteKey);
   }
 
   static void removeNote(int index) async {
