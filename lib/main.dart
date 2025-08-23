@@ -1,17 +1,17 @@
-import 'package:depi_7_25/cubit/note_cubit.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
-import 'package:depi_7_25/screen/note_screen.dart';
+import 'package:depi_7_25/splash/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import 'auth/login_screen.dart';
+import 'onboarding/onboarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
-  await Hive.openBox(HiveHelper.noteBox);
-  await HiveHelper.getMyNotes();
-  // var box = Hive.box("box1");
+  await Hive.openBox(HiveHelper.onboardingBox);
   //
   // // box.put("name", "Ahmed");
   //
@@ -25,12 +25,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: BlocProvider(create: (context) => NoteCubit(), child: NoteScreen()),
+      home: SplashScreen(),
     );
   }
 }
+
+/// Get.to
+/// Get.off
+/// Get.offAll
+/// Get.back
 
 /// (1) MaterialApp()
 /// (2) Scaffold
