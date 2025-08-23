@@ -1,256 +1,235 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'bmi_cubit.dart';
+import 'bmi_state.dart';
 
-enum SexType { MALE, FEMALE }
-
-class BmiScreen extends StatefulWidget {
+class BmiScreen extends StatelessWidget {
   const BmiScreen({super.key});
-
-  @override
-  State<BmiScreen> createState() => _BmiScreenState();
-}
-
-class _BmiScreenState extends State<BmiScreen> {
-  double height = 100;
-  double weight = 0;
-  double age = 0;
-  SexType type = SexType.MALE;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        color: Colors.black.withOpacity(.8),
-        padding: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
-        child: Column(
-          children: [
-            _header(),
-            SizedBox(height: 20),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        type = SexType.MALE;
-                        setState(() {});
-                      },
-                      child: Container(
-                        decoration: _decoration(
-                          color: type == SexType.MALE ? Colors.red : null,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Male",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+      body: BlocBuilder<BmiCubit, BmiState>(
+        builder: (context, state) {
+          return Container(
+            color: Colors.black.withOpacity(.8),
+            padding: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
+            child: Column(
+              children: [
+                _header(),
+                SizedBox(height: 20),
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            context.read<BmiCubit>().updateSexType(SexType.MALE);
+                          },
+                          child: Container(
+                            decoration: _decoration(
+                              color: state.sexType == SexType.MALE ? Colors.red : null,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Male",
+                                style: TextStyle(color: Colors.white, fontSize: 30),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
 
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        type = SexType.FEMALE;
-                        setState(() {});
-                      },
-                      child: Container(
-                        decoration: _decoration(
-                          color: type == SexType.FEMALE ? Colors.red : null,
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Female",
-                            style: TextStyle(color: Colors.white, fontSize: 30),
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {
+                            context.read<BmiCubit>().updateSexType(SexType.FEMALE);
+                          },
+                          child: Container(
+                            decoration: _decoration(
+                              color: state.sexType == SexType.FEMALE ? Colors.red : null,
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Female",
+                                style: TextStyle(color: Colors.white, fontSize: 30),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              flex: 3,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                padding: EdgeInsets.all(20),
-                decoration: _decoration(),
-                child: Column(
-                  children: [
-                    Text(
-                      "HEIGHT",
-                      style: TextStyle(color: Colors.grey, fontSize: 18),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                ),
+                SizedBox(height: 20),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    height: 200,
+                    width: double.infinity,
+                    padding: EdgeInsets.all(20),
+                    decoration: _decoration(),
+                    child: Column(
                       children: [
                         Text(
-                          height.toInt().toString(),
-                          style: TextStyle(fontSize: 40, color: Colors.white),
+                          "HEIGHT",
+                          style: TextStyle(color: Colors.grey, fontSize: 18),
                         ),
-                        SizedBox(width: 5),
-                        Text(
-                          "CM",
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              state.height.toInt().toString(),
+                              style: TextStyle(fontSize: 40, color: Colors.white),
+                            ),
+                            SizedBox(width: 5),
+                            Text(
+                              "CM",
+                              style: TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Slider(
+                          activeColor: Colors.red,
+                          min: 100,
+                          max: 220,
+                          value: state.height,
+                          onChanged: (value) {
+                            context.read<BmiCubit>().updateHeight(value);
+                          },
                         ),
                       ],
                     ),
-                    Slider(
-                      activeColor: Colors.red,
-                      min: 100,
-                      max: 220,
-                      value: height,
-                      onChanged: (value) {
-                        height = value;
-                        setState(() {});
-                        print(value);
-                      },
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 20),
-            Expanded(
-              flex: 3,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 220,
-                      padding: EdgeInsets.all(10),
-                      decoration: _decoration(),
-                      child: Column(
-                        children: [
-                          Text(
-                            "WEIGHT",
-                            style: TextStyle(color: Colors.grey, fontSize: 18),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            weight.toInt().toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 40),
-                          ),
-                          SizedBox(height: 20),
-                          Row(
+                SizedBox(height: 20),
+                Expanded(
+                  flex: 3,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 220,
+                          padding: EdgeInsets.all(10),
+                          decoration: _decoration(),
+                          child: Column(
                             children: [
-                              FloatingActionButton(
-                                onPressed: () {
-                                  weight++;
-                                  setState(() {});
-                                },
-                                shape: const CircleBorder(),
-                                backgroundColor: Colors.black,
-                                child: Icon(Icons.add, color: Colors.white),
+                              Text(
+                                "WEIGHT",
+                                style: TextStyle(color: Colors.grey, fontSize: 18),
                               ),
-                              Spacer(),
-                              FloatingActionButton(
-                                onPressed: () {
-                                  if (weight > 0) weight--;
-                                  setState(() {});
-                                },
-                                shape: const CircleBorder(),
-                                backgroundColor: Colors.black,
-                                child: Icon(Icons.remove, color: Colors.white),
+                              SizedBox(height: 20),
+                              Text(
+                                state.weight.toInt().toString(),
+                                style: TextStyle(color: Colors.white, fontSize: 40),
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      context.read<BmiCubit>().incrementWeight();
+                                    },
+                                    shape: const CircleBorder(),
+                                    backgroundColor: Colors.black,
+                                    child: Icon(Icons.add, color: Colors.white),
+                                  ),
+                                  Spacer(),
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      context.read<BmiCubit>().decrementWeight();
+                                    },
+                                    shape: const CircleBorder(),
+                                    backgroundColor: Colors.black,
+                                    child: Icon(Icons.remove, color: Colors.white),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
 
-                  SizedBox(width: 20),
-                  Expanded(
-                    child: Container(
-                      height: 220,
-                      padding: EdgeInsets.all(10),
-                      decoration: _decoration(),
-                      child: Column(
-                        children: [
-                          Text(
-                            "AGE",
-                            style: TextStyle(color: Colors.grey, fontSize: 18),
-                          ),
-                          SizedBox(height: 20),
-                          Text(
-                            age.toInt().toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 40),
-                          ),
-                          SizedBox(height: 20),
-                          Row(
+                      SizedBox(width: 20),
+                      Expanded(
+                        child: Container(
+                          height: 220,
+                          padding: EdgeInsets.all(10),
+                          decoration: _decoration(),
+                          child: Column(
                             children: [
-                              FloatingActionButton(
-                                onPressed: () {
-                                  age++;
-                                  setState(() {});
-                                },
-                                shape: const CircleBorder(),
-                                backgroundColor: Colors.black,
-                                child: Icon(Icons.add, color: Colors.white),
+                              Text(
+                                "AGE",
+                                style: TextStyle(color: Colors.grey, fontSize: 18),
                               ),
-                              Spacer(),
-                              FloatingActionButton(
-                                onPressed: () {
-                                  if (age > 0) age--;
-                                  setState(() {});
-                                },
-                                shape: const CircleBorder(),
-                                backgroundColor: Colors.black,
-                                child: Icon(Icons.remove, color: Colors.white),
+                              SizedBox(height: 20),
+                              Text(
+                                state.age.toInt().toString(),
+                                style: TextStyle(color: Colors.white, fontSize: 40),
+                              ),
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      context.read<BmiCubit>().incrementAge();
+                                    },
+                                    shape: const CircleBorder(),
+                                    backgroundColor: Colors.black,
+                                    child: Icon(Icons.add, color: Colors.white),
+                                  ),
+                                  Spacer(),
+                                  FloatingActionButton(
+                                    onPressed: () {
+                                      context.read<BmiCubit>().decrementAge();
+                                    },
+                                    shape: const CircleBorder(),
+                                    backgroundColor: Colors.black,
+                                    child: Icon(Icons.remove, color: Colors.white),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20),
+                BlocListener<BmiCubit, BmiState>(
+                  listener: (context, state) {
+                    if (state.bmiResult != null) {
+                      showAlertDialog(context, title: state.bmiResult!);
+                    }
+                  },
+                  child: InkWell(
+                    onTap: () {
+                      context.read<BmiCubit>().calculateBmi();
+                    },
+                    child: Container(
+                      height: 80,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Calculate your bmi",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            SizedBox(height: 20),
-            InkWell(
-              onTap: () {
-                var bmi = weight / (height * height) * 10000;
-                var result = "";
-                switch (bmi) {
-                  case < 18.5:
-                    result = "Underweight";
-                  case >= 18.5 && <= 24.9:
-                    result = "Normal weight";
-                  case >= 25 && <= 29.9:
-                    result = "Overweight";
-
-                  default:
-                    result = "Obese";
-                }
-
-                showAlertDialog(context, title: result);
-                print(bmi.toString());
-              },
-              child: Container(
-                height: 80,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: Center(
-                  child: Text(
-                    "Calculate your bmi",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
