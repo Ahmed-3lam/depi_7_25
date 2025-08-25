@@ -6,12 +6,17 @@ class CustomTextField extends StatefulWidget {
   final bool? isPassword;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final bool isBorderContainer;
+  final TextEditingController controller;
+
   const CustomTextField({
     super.key,
     required this.label,
     this.isPassword = false,
     this.validator,
     this.keyboardType,
+    this.isBorderContainer = false,
+    required this.controller,
   });
 
   @override
@@ -36,10 +41,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+            color: widget.isBorderContainer ? null : Colors.grey[100],
             borderRadius: BorderRadius.circular(7),
+            border: widget.isBorderContainer
+                ? Border.all(color: Colors.grey.withOpacity(.2))
+                : null,
           ),
           child: TextFormField(
+            controller: widget.controller,
             keyboardType: widget.keyboardType,
             obscureText: widget.isPassword! ? obscureText : false,
             obscuringCharacter: "*",

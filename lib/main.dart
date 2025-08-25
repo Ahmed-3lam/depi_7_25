@@ -1,23 +1,32 @@
+import 'package:depi_7_25/auth/models/login_model.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:depi_7_25/splash/splash_screen.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
-import 'auth/login_screen.dart';
 import 'onboarding/onboarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
+  Hive.registerAdapter(LoginModelAdapter());
   await Hive.openBox(HiveHelper.onboardingBox);
+  await Hive.openBox(HiveHelper.loginData);
+
   //
   // // box.put("name", "Ahmed");
   //
   // String name = box.get("name");
 
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,6 +35,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
@@ -33,18 +45,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/// Get.to
-/// Get.off
-/// Get.offAll
-/// Get.back
-
-/// (1) MaterialApp()
-/// (2) Scaffold
-/// (3) Container()
-/// (4) Center
-/// (5) Text
-/// (6) Padding
-/// (7) Column
-/// (8) Row
-/// (9) Appbar
-/// (10) Icon
+/// MVC
+/// MVVM: View Model - View - Model
+///

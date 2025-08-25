@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:depi_7_25/auth/view/login_screen.dart';
+import 'package:depi_7_25/auth/view/sign_up_screen.dart';
 import 'package:depi_7_25/const.dart';
 import 'package:depi_7_25/widgets/custom_btn.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -68,12 +71,20 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 Spacer(),
-                CustomButton(title: "Continue with Email or Phone"),
+                CustomButton(
+                  title: "Continue with Email or Phone",
+                  onTap: () {
+                    Get.to(LoginScreen());
+                  },
+                ),
                 SizedBox(height: 20),
                 CustomButton(
                   title: "Create an account",
                   color: Colors.white,
                   textColor: Colors.black,
+                  onTap: () {
+                    Get.to(SignUpScreen());
+                  },
                 ),
               ],
             ),

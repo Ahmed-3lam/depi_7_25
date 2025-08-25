@@ -1,8 +1,8 @@
-import 'package:depi_7_25/auth/auth_screen.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../auth/view/auth_screen.dart';
 import '../const.dart';
 
 class OnboardingScreen extends StatefulWidget {
