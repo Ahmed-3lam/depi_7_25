@@ -1,7 +1,9 @@
 import 'package:depi_7_25/auth/models/login_model.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
+import 'package:depi_7_25/posts_screen.dart';
 import 'package:depi_7_25/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +34,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -40,11 +43,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: PostsScreen(),
     );
   }
 }
-
-/// MVC
-/// MVVM: View Model - View - Model
-///
