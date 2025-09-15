@@ -19,17 +19,18 @@ class AuthCubit extends Cubit<AuthState> {
         path: "login",
         body: {"email": loginModel.email, "password": loginModel.password},
       );
+    
 
-      if (response.statusCode == 200) {
+      if (response.data["status_code"] == 200) {
         Get.snackbar("Success", response.data["message"]);
         emit(AuthSuccessState());
       } else {
-         Get.snackbar("Error", response.data["message"]);
+        Get.snackbar("Error", response.data["message"]);
         emit(AuthErrorState());
       }
-
-
     } catch (e) {
+      Get.snackbar("Error", e.toString());
+      print(e.toString());
       emit(AuthErrorState());
     }
   }

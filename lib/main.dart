@@ -1,6 +1,7 @@
 import 'package:depi_7_25/auth/models/login_model.dart';
 import 'package:depi_7_25/helpers/dio_helper.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
+import 'package:depi_7_25/home/home_screen.dart';
 import 'package:depi_7_25/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: HomeScreen(),
     );
   }
 }
