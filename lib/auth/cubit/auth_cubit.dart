@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:depi_7_25/auth/models/login_model.dart';
+import 'package:depi_7_25/helpers/dio_helper.dart';
 import 'package:depi_7_25/helpers/hive_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,15 +15,20 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoadingState());
 
     try {
-      await Future.delayed(Duration(seconds: 5));
-      if (loginModel.email == "3lam.ahmed@gmail.com" &&
-          loginModel.password == "123456") {
-        await HiveHelper.setLoginData(loginModel);
-        HiveHelper.getLoginData();
+      final response = await DioHelper.postData(
+        path: "login",
+        body: {"email": loginModel.email, "password": loginModel.password},
+      );
+
+      if (response.statusCode == 200) {
+        Get.snackbar("Success", response.data["message"]);
         emit(AuthSuccessState());
       } else {
+         Get.snackbar("Error", response.data["message"]);
         emit(AuthErrorState());
       }
+
+
     } catch (e) {
       emit(AuthErrorState());
     }

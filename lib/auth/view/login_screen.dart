@@ -30,20 +30,20 @@ class _LoginScreenState extends State<LoginScreen> {
       create: (context) => AuthCubit(),
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccessState) {
-            Get.snackbar(
-              "Success",
-              "Credintials is correct",
-              backgroundColor: Colors.green,
-            );
-          }
-          if (state is AuthErrorState) {
-            Get.snackbar(
-              "Error",
-              "Credintials is incorrect",
-              backgroundColor: Colors.red,
-            );
-          }
+          // if (state is AuthSuccessState) {
+          //   Get.snackbar(
+          //     "Success",
+          //     "Credintials is correct",
+          //     backgroundColor: Colors.green,
+          //   );
+          // }
+          // if (state is AuthErrorState) {
+          //   Get.snackbar(
+          //     "Error",
+          //     "Credintials is incorrect",
+          //     backgroundColor: Colors.red,
+          //   );
+          // }
         },
         child: Scaffold(
           body: SafeArea(
