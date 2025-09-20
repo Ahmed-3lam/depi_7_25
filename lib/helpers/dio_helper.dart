@@ -1,3 +1,4 @@
+import 'package:depi_7_25/helpers/kapis.dart';
 import 'package:dio/dio.dart';
 
 class DioHelper {
@@ -6,7 +7,7 @@ class DioHelper {
   static void initialized() {
     _dio = Dio(
       BaseOptions(
-        baseUrl: "http://10.0.2.2:3000/",
+        baseUrl: KApis.baseUrl,
         connectTimeout: Duration(seconds: 30),
         sendTimeout: Duration(seconds: 30),
         receiveTimeout: Duration(seconds: 30),
