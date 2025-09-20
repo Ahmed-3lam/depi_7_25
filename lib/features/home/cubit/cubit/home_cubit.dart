@@ -1,9 +1,10 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:depi_7_25/helpers/dio_helper.dart';
-import 'package:depi_7_25/helpers/kapis.dart';
-import 'package:depi_7_25/home/model/banner_model.dart';
+import 'package:depi_7_25/core/network/dio_helper.dart';
+import 'package:depi_7_25/core/network/kapis.dart';
+import 'package:depi_7_25/features/home/model/banner_model.dart';
+import 'package:depi_7_25/features/home/model/product_model.dart';
 import 'package:meta/meta.dart';
 
 part 'home_state.dart';
@@ -12,6 +13,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
   var bannerModel = BannerModel();
+  var productModel = ProductModel();
 
   void getBanners() async {
     emit(BannerLoadingState());
@@ -32,8 +34,23 @@ class HomeCubit extends Cubit<HomeState> {
       emit(BannerErrorState(e.toString()));
     }
   }
-}
 
+  void getProduct() async {
+    emit(ProductLoadingState());
+
+    try{
+      final response = await DioHelper.getData(KApis.products);
+      productModel = ProductModel.fromJson(response.data);
+      if(productModel.statusCode == 200){
+        emit(ProductSuccessState());
+      }else{
+        emit(ProductErrorState(productModel.message??""));
+      }
+    }catch(e){
+        emit(ProductErrorState(e.toString()));
+    }
+    }
+  }
 
 
 ///MVVM

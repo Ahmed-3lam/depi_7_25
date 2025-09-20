@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:depi_7_25/const.dart';
-import 'package:depi_7_25/helpers/hive_helper.dart';
-import 'package:depi_7_25/onboarding/onboarding_screen.dart';
+import 'package:depi_7_25/core/const.dart';
+import 'package:depi_7_25/core/helpers/hive_helper.dart';
+import 'package:depi_7_25/features/home/home_screen.dart';
+import 'package:depi_7_25/features/onboarding/onboarding_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -42,6 +43,8 @@ class _SplashScreenState extends State<SplashScreen> {
         timer.cancel();
         if (HiveHelper.isOnboardingBoxEmpty()) {
           Get.off(OnboardingScreen());
+        } else if (HiveHelper.getToken() != null) {
+          Get.off(HomeScreen());
         } else {
           Get.off(AuthScreen());
         }

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:depi_7_25/auth/view/login_screen.dart';
-import 'package:depi_7_25/auth/view/sign_up_screen.dart';
-import 'package:depi_7_25/const.dart';
-import 'package:depi_7_25/widgets/custom_btn.dart';
+import 'package:depi_7_25/features/auth/view/login_screen.dart';
+import 'package:depi_7_25/features/auth/view/sign_up_screen.dart';
+import 'package:depi_7_25/core/const.dart';
+import 'package:depi_7_25/core/widgets/custom_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

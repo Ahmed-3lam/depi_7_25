@@ -1,4 +1,4 @@
-import 'package:depi_7_25/widgets/custom_password_field.dart';
+import 'package:depi_7_25/core/widgets/custom_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

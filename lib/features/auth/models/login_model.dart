@@ -9,12 +9,15 @@ class LoginModel extends HiveObject {
   @HiveField(1)
   final String password;
 
-  LoginModel(this.email, this.password);
+  @HiveField(2)
+  final String? token;
+
+  LoginModel({required this.email , required this.password , this.token});
 
   String toJson() {
     return """
     { email: $email ,
-    password: $password,}
+    password: $password, token $token}
        
     """;
   }

@@ -13,3 +13,13 @@ final class BannerErrorState extends HomeState {
   final String msg;
   BannerErrorState(this.msg);
 }
+
+
+final class ProductLoadingState extends HomeState {}
+
+final class ProductSuccessState extends HomeState {}
+
+final class ProductErrorState extends HomeState {
+  final String msg;
+  ProductErrorState(this.msg);
+}

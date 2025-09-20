@@ -1,9 +1,9 @@
-import 'package:depi_7_25/helpers/kapis.dart';
+import 'package:depi_7_25/core/network/kapis.dart';
 import 'package:dio/dio.dart';
 
 class DioHelper {
   static late Dio _dio;
-
+                  
   static void initialized() {
     _dio = Dio(
       BaseOptions(

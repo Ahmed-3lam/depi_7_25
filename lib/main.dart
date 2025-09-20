@@ -1,8 +1,8 @@
-import 'package:depi_7_25/auth/models/login_model.dart';
-import 'package:depi_7_25/helpers/dio_helper.dart';
-import 'package:depi_7_25/helpers/hive_helper.dart';
-import 'package:depi_7_25/home/home_screen.dart';
-import 'package:depi_7_25/splash/splash_screen.dart';
+import 'package:depi_7_25/features/auth/models/login_model.dart';
+import 'package:depi_7_25/core/network/dio_helper.dart';
+import 'package:depi_7_25/core/helpers/hive_helper.dart';
+import 'package:depi_7_25/features/home/home_screen.dart';
+import 'package:depi_7_25/features/splash/splash_screen.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -16,6 +16,7 @@ void main() async {
   Hive.registerAdapter(LoginModelAdapter());
   await Hive.openBox(HiveHelper.onboardingBox);
   await Hive.openBox(HiveHelper.loginData);
+  await Hive.openBox(HiveHelper.tokenBox);
   DioHelper.initialized();
 
   runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }

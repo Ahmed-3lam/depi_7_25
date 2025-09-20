@@ -1,14 +1,14 @@
-import 'package:depi_7_25/auth/cubit/auth_cubit.dart';
-import 'package:depi_7_25/auth/models/login_model.dart';
-import 'package:depi_7_25/auth/view/sign_up_screen.dart';
-import 'package:depi_7_25/widgets/custom_password_field.dart';
+import 'package:depi_7_25/features/auth/cubit/auth_cubit.dart';
+import 'package:depi_7_25/features/auth/models/login_model.dart';
+import 'package:depi_7_25/features/auth/view/sign_up_screen.dart';
+import 'package:depi_7_25/core/widgets/custom_password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../const.dart';
+import '../../../core/const.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -116,8 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               _key.currentState!.validate();
                               cubit.login(
                                 LoginModel(
-                                  _emailController.text,
-                                  _passwordController.text,
+                                email:  _emailController.text,
+                                 password:  _passwordController.text,
                                 ),
                               );
                             },
