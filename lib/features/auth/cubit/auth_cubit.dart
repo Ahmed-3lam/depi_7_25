@@ -5,6 +5,7 @@ import 'package:depi_7_25/core/network/dio_helper.dart';
 import 'package:depi_7_25/core/helpers/hive_helper.dart';
 import 'package:depi_7_25/core/network/kapis.dart';
 import 'package:depi_7_25/features/home/home_screen.dart';
+import 'package:depi_7_25/features/main/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
@@ -29,7 +30,8 @@ class AuthCubit extends Cubit<AuthState> {
 
       if (apiLoginModel.statusCode == 200) {
         HiveHelper.setToken(apiLoginModel.data!.token!);
-        Get.offAll(HomeScreen());
+        DioHelper.addTokenInterceptor();
+        Get.offAll(MainScreen());
         emit(AuthSuccessState());
       } else {
         Get.snackbar("Error", response.data["message"]);

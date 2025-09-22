@@ -3,4 +3,5 @@ class KApis {
   static const String login = "login";
   static const String banners = "banners";
   static const String products = "products";
+  static const String profile = "profile";
 }

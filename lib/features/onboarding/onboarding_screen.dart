@@ -27,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               width: double.infinity,
               child: Image.asset(imagePath + "onboarding_$count.png"),
             ),
-            SizedBox(height: 80),
+            SizedBox(height: 60),
             Text(
               titles[count - 1],
               style: TextStyle(

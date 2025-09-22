@@ -87,14 +87,27 @@ class _LoginScreenState extends State<LoginScreen> {
                               }
                             },
                           ),
-                          CustomTextField(
-                            controller: _passwordController,
-                            label: "Password",
-                            isPassword: true,
-                            validator: (value) {
-                              if (value!.length < 6) {
-                                return "Password should be more than 6 letters";
-                              }
+                          BlocBuilder<AuthCubit, AuthState>(
+                            builder: (context, state) {
+                              return CustomTextField(
+                                controller: _passwordController,
+                                label: "Password",
+                                isPassword: true,
+                                onSaved: (val) {
+                                  // _key.currentState!.validate();
+                                  context.read<AuthCubit>().login(
+                                    LoginModel(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                                },
+                                validator: (value) {
+                                  if (value!.length < 6) {
+                                    return "Password should be more than 6 letters";
+                                  }
+                                },
+                              );
                             },
                           ),
                         ],
@@ -116,8 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               _key.currentState!.validate();
                               cubit.login(
                                 LoginModel(
-                                email:  _emailController.text,
-                                 password:  _passwordController.text,
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
                                 ),
                               );
                             },

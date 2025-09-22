@@ -8,6 +8,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType? keyboardType;
   final bool isBorderContainer;
   final TextEditingController controller;
+  final void Function(String?)? onSaved;
 
   const CustomTextField({
     super.key,
@@ -17,6 +18,7 @@ class CustomTextField extends StatefulWidget {
     this.keyboardType,
     this.isBorderContainer = false,
     required this.controller,
+    this.onSaved,
   });
 
   @override
@@ -53,6 +55,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             obscureText: widget.isPassword! ? obscureText : false,
             obscuringCharacter: "*",
             validator: widget.validator,
+            onFieldSubmitted: widget.onSaved,
             decoration: InputDecoration(
               suffixIcon: !widget.isPassword!
                   ? null
