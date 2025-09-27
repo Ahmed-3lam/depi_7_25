@@ -1,3 +1,5 @@
+import 'package:depi_7_25/counter_provider.dart';
+import 'package:depi_7_25/counter_screen.dart';
 import 'package:depi_7_25/features/auth/models/login_model.dart';
 import 'package:depi_7_25/core/network/dio_helper.dart';
 import 'package:depi_7_25/core/helpers/hive_helper.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +36,10 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: ChangeNotifierProvider(
+        create: (context) => CounterProvider(),
+        child: CounterScreen(),
+      ),
     );
   }
 }
