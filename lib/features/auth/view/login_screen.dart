@@ -5,8 +5,10 @@ import 'package:depi_7_25/core/widgets/custom_password_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_social_button/flutter_social_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../../core/const.dart';
 
@@ -172,6 +174,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ],
+                      ),
+                      BlocBuilder<AuthCubit, AuthState>(
+                        builder: (context, state) {
+                          if (state is AuthLoadingGoogleSignInState) {
+                            return Center(
+                              child: LoadingAnimationWidget.twistingDots(
+                                leftDotColor: const Color(0xFF1A1A3F),
+                                rightDotColor: const Color(0xFFEA3799),
+                                size: 30,
+                              ),
+                            );
+                          }
+                          return FlutterSocialButton(
+                            onTap: () {
+                              context.read<AuthCubit>().loginWithFirebase();
+                            },
+                            buttonType: ButtonType
+                                .google, // Button type for different type buttons
+                          );
+                        },
                       ),
                     ],
                   ),

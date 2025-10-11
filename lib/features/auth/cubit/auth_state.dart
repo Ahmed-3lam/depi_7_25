@@ -6,6 +6,8 @@ sealed class AuthState {}
 final class AuthInitial extends AuthState {}
 
 final class AuthLoadingState extends AuthState {}
+final class AuthLoadingFireBaseState extends AuthState {}
+final class AuthLoadingGoogleSignInState extends AuthState {}
 
 final class AuthSuccessState extends AuthState {}
 

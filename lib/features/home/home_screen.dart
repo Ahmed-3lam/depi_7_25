@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
     var width = MediaQuery.sizeOf(context).width;
     return BlocProvider(
       create: (context) => HomeCubit()
-        ..getBanners()
+        ..getBannersFromFirebase()
         ..getProduct(),
       child: Scaffold(
         appBar: _homeAppbar(width),
@@ -163,13 +163,13 @@ class HomeScreen extends StatelessWidget {
   Widget _banners() {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
-        final banners = context.read<HomeCubit>().bannerModel.data;
+        final banners = context.read<HomeCubit>().bannerImages;
         if (state is BannerLoadingState) {
           return Center(child: CircularProgressIndicator());
         }
         return CarouselSlider(
           items: List.generate(
-            (banners?.length ?? 0),
+            (banners.length ),
             (index) => Container(
               height: 200,
               width: double.infinity,
@@ -180,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                 ), // Adjust the radius as needed
               ),
               child: Image.network(
-                banners?[index].image ?? "",
+                banners[index],
                 fit: BoxFit.cover,
               ),
             ),

@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "87425234975",
+    "project_id": "depi-7-25",
+    "storage_bucket": "depi-7-25.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87425234975:android:b0f0c01b3f176a238a7d2a",
+        "android_client_info": {
+          "package_name": "com.depi.eyouth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87425234975-2i9kb77kl5j4m5ais2lp0iciqvsrnjbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGyYIYsT0A9tszW9VQ-moB8YC67p-QNcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87425234975-2i9kb77kl5j4m5ais2lp0iciqvsrnjbv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "87425234975-14k1vp16h8olti36va3ppmsab2fa4kee.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.depi.eyouth"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:87425234975:android:49d6f6d9bb8465c68a7d2a",
+        "android_client_info": {
+          "package_name": "com.depi.eyouth255"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "87425234975-2i9kb77kl5j4m5ais2lp0iciqvsrnjbv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBGyYIYsT0A9tszW9VQ-moB8YC67p-QNcA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "87425234975-2i9kb77kl5j4m5ais2lp0iciqvsrnjbv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "87425234975-14k1vp16h8olti36va3ppmsab2fa4kee.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.depi.eyouth"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

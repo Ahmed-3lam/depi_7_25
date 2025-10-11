@@ -5,6 +5,7 @@ import 'package:depi_7_25/core/helpers/hive_helper.dart';
 import 'package:depi_7_25/features/home/home_screen.dart';
 import 'package:depi_7_25/features/main/main_screen.dart';
 import 'package:depi_7_25/features/onboarding/onboarding_screen.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

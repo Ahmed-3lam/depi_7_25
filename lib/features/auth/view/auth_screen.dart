@@ -39,6 +39,12 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   @override
+  void dispose() {
+    timer!.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(

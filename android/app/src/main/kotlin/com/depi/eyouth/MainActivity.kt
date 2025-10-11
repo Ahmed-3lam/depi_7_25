@@ -1,4 +1,4 @@
-package com.eyouth.depi.depi_7_25
+package com.depi.eyouth
 
 import io.flutter.embedding.android.FlutterActivity
 

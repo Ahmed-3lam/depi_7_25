@@ -7,11 +7,9 @@ class ApiLoginModel {
 
   ApiLoginModel.fromJson(Map<String, dynamic> json) {
     statusCode = json['status_code'];
-    data = json['data'] != null ?  LoginData.fromJson(json['data']) : null;
+    data = json['data'] != null ? LoginData.fromJson(json['data']) : null;
     message = json['message'];
   }
-
- 
 }
 
 class LoginData {
@@ -24,8 +22,6 @@ class LoginData {
     token = json['token'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
   }
-
-
 }
 
 class User {
@@ -45,5 +41,7 @@ class User {
     image = json['image'];
   }
 
-  
+  Map<String, dynamic> toJson() {
+    return {"id": id, "name": name, "email": email, "phone": phone};
+  }
 }
