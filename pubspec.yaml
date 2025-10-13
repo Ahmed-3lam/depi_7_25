@@ -58,6 +58,8 @@ dependencies:
   firebase_crashlytics: ^5.0.2
   flutter_social_button: ^1.1.6+1
   cloud_firestore: ^6.0.2
+  firebase_messaging: ^16.0.3
+  flutter_local_notifications: 17.2.4
   
 
 
