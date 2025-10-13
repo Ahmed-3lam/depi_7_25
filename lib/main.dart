@@ -26,6 +26,9 @@ void main() async {
   final google = await GoogleSignIn.instance.initialize(
     clientId: googleClientId,
   );
+
+
+  
   await Hive.initFlutter();
   Hive.registerAdapter(LoginModelAdapter());
   await Hive.openBox(HiveHelper.onboardingBox);
