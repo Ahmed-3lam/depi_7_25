@@ -6,6 +6,7 @@ import 'package:depi_7_25/features/auth/view/login_screen.dart';
 import 'package:depi_7_25/features/splash/splash_screen.dart';
 
 import 'package:depi_7_25/firebase_options.dart';
+import 'package:depi_7_25/l10n/app_localizations.dart';
 
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -106,8 +107,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       useInheritedMediaQuery: true,
-      locale: DevicePreview.locale(context),
+      locale: Locale("ar"),
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,

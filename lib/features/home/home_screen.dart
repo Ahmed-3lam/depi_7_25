@@ -3,6 +3,7 @@ import 'package:depi_7_25/features/auth/view/login_screen.dart';
 import 'package:depi_7_25/core/helpers/hive_helper.dart';
 import 'package:depi_7_25/features/home/cubit/cubit/home_cubit.dart';
 import 'package:depi_7_25/features/home/model/product_model.dart';
+import 'package:depi_7_25/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         ..getBannersFromFirebase()
         ..getProduct(),
       child: Scaffold(
-        appBar: _homeAppbar(width),
+        appBar: _homeAppbar(width, context),
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -35,7 +36,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Popular Pack",
+                      AppLocalizations.of(context)!.popular_packages,
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     Spacer(),
                     Text(
-                      "View All",
+                      AppLocalizations.of(context)!.view_all,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -169,7 +170,7 @@ class HomeScreen extends StatelessWidget {
         }
         return CarouselSlider(
           items: List.generate(
-            (banners.length ),
+            (banners.length),
             (index) => Container(
               height: 200,
               width: double.infinity,
@@ -179,10 +180,7 @@ class HomeScreen extends StatelessWidget {
                   15,
                 ), // Adjust the radius as needed
               ),
-              child: Image.network(
-                banners[index],
-                fit: BoxFit.cover,
-              ),
+              child: Image.network(banners[index], fit: BoxFit.cover),
             ),
           ),
           options: CarouselOptions(
@@ -201,7 +199,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  AppBar _homeAppbar(double width) {
+  AppBar _homeAppbar(double width, BuildContext context) {
     return AppBar(
       leading: Icon(Icons.menu),
       title: Padding(
@@ -217,7 +215,7 @@ class HomeScreen extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Current Location",
+                      AppLocalizations.of(context)!.current_location,
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
@@ -231,7 +229,7 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  "Shebin Elkom",
+                  AppLocalizations.of(context)!.shebin_elkom,
                   style: TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
