@@ -6,11 +6,30 @@ import 'package:depi_7_25/features/home/model/product_model.dart';
 import 'package:depi_7_25/l10n/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  static const batteryChannel = MethodChannel('depi.flutter/battery');
+
+  Future<void> _getBatteryLevel() async {
+    try {
+      final int result = await batteryChannel.invokeMethod('getBatteryLevel');
+      print("Battery Level is $result %");
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,13 +220,24 @@ class HomeScreen extends StatelessWidget {
 
   AppBar _homeAppbar(double width, BuildContext context) {
     return AppBar(
-      leading: Icon(Icons.menu),
+      leading: InkWell(
+        onTap: () {
+          if (Get.locale.toString() == "ar") {
+            Get.updateLocale(Locale("en"));
+          } else {
+            Get.updateLocale(Locale("ar"));
+          }
+
+          setState(() {});
+        },
+        child: Icon(Icons.menu),
+      ),
       title: Padding(
         padding: EdgeInsetsDirectional.only(start: width / 7),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Icon(Icons.pin_drop),
+            InkWell(onTap: () {}, child: Icon(Icons.pin_drop)),
             SizedBox(width: width * .01),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,12 +271,19 @@ class HomeScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsetsDirectional.only(end: 10.0),
           child: InkWell(
-            onTap: () {
-              HiveHelper.clearToken();
-              Get.offAll(LoginScreen());
+            onTap: () async {
+              await _getBatteryLevel();
+              // HiveHelper.clearToken();
+              // Get.offAll(LoginScreen());
             },
             child: Icon(Icons.logout),
           ),
+        ),
+        IconButton(
+          onPressed: () async {
+            await ImagePicker().pickImage(source: ImageSource.camera);
+          },
+          icon: Icon(Icons.camera),
         ),
       ],
     );

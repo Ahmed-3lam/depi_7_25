@@ -8,6 +8,7 @@ import 'package:depi_7_25/features/onboarding/onboarding_screen.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -22,6 +23,7 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+ 
   String image = "logo_2.svg";
   Color backgroundColor = Colors.green;
 

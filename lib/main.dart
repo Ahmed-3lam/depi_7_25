@@ -21,6 +21,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -31,12 +32,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  FirebaseMessaging.instance
-      .requestPermission(alert: true, badge: true, sound: true);
+  FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
   FirebaseMessaging.instance.getToken().then((token) {
     assert(token != null);
     print(token.toString());
@@ -57,7 +60,8 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
+        AndroidFlutterLocalNotificationsPlugin
+      >()
       ?.createNotificationChannel(channel);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -68,22 +72,22 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     // local notification to show to users using the created channel.
     if (notification != null && android != null) {
       flutterLocalNotificationsPlugin.show(
-          notification.hashCode,
-          notification.title,
-          notification.body,
-          NotificationDetails(
-            android: AndroidNotificationDetails(
-              channel.id,
-              channel.name,
-              channelDescription: channel.description,
-              icon: android.smallIcon,
-              // other properties...
-            ),
-          ));
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            icon: android.smallIcon,
+            // other properties...
+          ),
+        ),
+      );
     }
   });
-  
-  
+
   // final google = await GoogleSignIn.instance.initialize(
   //   clientId: googleClientId,
   // );
@@ -101,8 +105,19 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
   runApp(DevicePreview(enabled: !kReleaseMode, builder: (context) => MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +129,7 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: ThemeData(fontFamily: "Gilroy"),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+       home: SplashScreen(),
     );
   }
 }
