@@ -1,4 +1,6 @@
 import 'package:depi_7_25/core/firebase/firestore_service.dart';
+import 'package:depi_7_25/counter/bloc/bloc/counter_bloc.dart';
+import 'package:depi_7_25/counter/counter_screen.dart';
 import 'package:depi_7_25/features/auth/models/login_model.dart';
 import 'package:depi_7_25/core/network/dio_helper.dart';
 import 'package:depi_7_25/core/helpers/hive_helper.dart';
@@ -15,6 +17,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -106,6 +109,11 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+    @Preview(
+    name: "counter screen",
+    textScaleFactor: 2,
+  
+  )
   const MyApp({super.key});
 
   @override
@@ -115,21 +123,25 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      useInheritedMediaQuery: true,
-      locale: Locale("ar"),
-      builder: DevicePreview.appBuilder,
-      theme: ThemeData(fontFamily: "Gilroy"),
-      debugShowCheckedModeBanner: false,
-       home: SplashScreen(),
+    return BlocProvider(
+      create: (context) => CounterBloc(),
+      child: GetMaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        useInheritedMediaQuery: true,
+        locale: Locale("ar"),
+        builder: DevicePreview.appBuilder,
+        theme: ThemeData(fontFamily: "Gilroy"),
+        debugShowCheckedModeBanner: false,
+        home: CounterScreen(),
+      ),
     );
   }
 }
+
+
